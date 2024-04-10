@@ -260,13 +260,13 @@ def Top_transaction_plot_1(df, state):
 
     col1,col2= st.columns(2)
     with col1:
-        fig_top_trans_bar_1= px.bar(tiy, x= "Transaction_amount", y= "Quarter", hover_data= "Pincodes",
+        fig_top_trans_bar_1= px.bar(tiy, x= "Quarter", y= "Transaction_amount", hover_data= "Pincodes",
                                 title= "TRANSACTION AMOUNT", height= 650,width= 600, color_discrete_sequence= px.colors.sequential.GnBu_r)
         st.plotly_chart(fig_top_trans_bar_1)
 
     with col2:
 
-        fig_top_trans_bar_2= px.bar(tiy, x= "Transaction_count", y= "Quarter", hover_data= "Pincodes",
+        fig_top_trans_bar_2= px.bar(tiy, x= "Quarter", y= "Transaction_count", hover_data= "Pincodes",
                                 title= "TRANSACTION COUNT", height= 650,width= 600, color_discrete_sequence= px.colors.sequential.Agsunset_r)
         st.plotly_chart(fig_top_trans_bar_2)
 
@@ -646,18 +646,18 @@ elif select=="DATA EXPLORATION":
         if method_1=="Aggregated Transaction Analysis":
             col1,col2=st.columns(2)
             with col1:
-                years=st.slider("Select the Year",Aggregated_transaction["Years"].min(),Aggregated_transaction["Years"].max(),Aggregated_transaction["Years"].min())
+                years=st.slider("Select the Year",Aggregated_transaction["Years"].min(),Aggregated_transaction["Years"].max(),Aggregated_transaction["Years"].min(),key=1)
             aggtr_y=Transaction_Y(Aggregated_transaction,years)
             
 
             col1,col2=st.columns(2)
             with col1:
-                quarters=st.slider("Select the Quarter",aggtr_y["Quarter"].min(),aggtr_y["Quarter"].max(),aggtr_y["Quarter"].min())
+                quarters=st.slider("Select the Quarter",aggtr_y["Quarter"].min(),aggtr_y["Quarter"].max(),aggtr_y["Quarter"].min(),key=2)
 
             aggtr_Y_Q=Transaction_Y_Q(aggtr_y,quarters)
 
             #Select the State for Analyse the Transaction type
-            state_Y_Q= st.selectbox("**Select the State**",aggtr_Y_Q["States"].unique())
+            state_Y_Q= st.selectbox("**Select the State**",aggtr_Y_Q["States"].unique(),key=10)
 
             Aggregated_Transaction_type(aggtr_Y_Q,state_Y_Q)
         
@@ -669,21 +669,21 @@ elif select=="DATA EXPLORATION":
             with col1:
 
                 years= st.slider("Select The Year",Aggregated_user["Years"].min(), Aggregated_user["Years"].max()
-                              ,Aggregated_user["Years"].min())
+                              ,Aggregated_user["Years"].min(),key=3)
 
             agg_u_y=Aggre_user_plot_1(Aggregated_user,years)
 
             col1,col2= st.columns(2)
             with col1:
 
-                quarters= st.selectbox("Select The Quarter",agg_u_y["Quarter"].unique())
+                quarters= st.selectbox("Select The Quarter",agg_u_y["Quarter"].unique(),key=11)
                                     
             
             agg_u_y_q=Aggre_user_plot_2(agg_u_y,quarters)
 
             col1,col2= st.columns(2)
             with col1:
-                states= st.selectbox("**Select the State_AU**",agg_u_y_q["States"].unique())
+                states= st.selectbox("**Select the State_AU**",agg_u_y_q["States"].unique(),key=12)
             Aggre_user_plot_3(agg_u_y_q,states)
 
             
@@ -692,18 +692,18 @@ elif select=="DATA EXPLORATION":
         if method_2=="Map Transaction Analysis":
             col1,col2=st.columns(2)
             with col1:
-                years=st.slider("Select the Year",Aggregated_transaction["Years"].min(),Aggregated_transaction["Years"].max(),Aggregated_transaction["Years"].min())
+                years=st.slider("Select the Year",Aggregated_transaction["Years"].min(),Aggregated_transaction["Years"].max(),Aggregated_transaction["Years"].min(),key=4)
             maptr_y=Transaction_Y(Map_transaction,years)
             
 
             col1,col2=st.columns(2)
             with col1:
-                quarters=st.selectbox("Select the Quarter",maptr_y["Quarter"].unique())
+                quarters=st.selectbox("Select the Quarter",maptr_y["Quarter"].unique(),key=13)
 
             maptr_Y_Q=Transaction_Y_Q(maptr_y,quarters)
 
             #Select the State for Analyse the Transaction type
-            state_Y_Q= st.selectbox("**Select the State**",maptr_Y_Q["States"].unique())
+            state_Y_Q= st.selectbox("**Select the State**",maptr_Y_Q["States"].unique(),key=14)
 
             Map_transaction_District(maptr_Y_Q,state_Y_Q)
         
@@ -712,19 +712,19 @@ elif select=="DATA EXPLORATION":
             col1,col2= st.columns(2)
             with col1:
 
-                years= st.slider("Select The Year_mu",Map_user["Years"].min(), Map_user["Years"].max()
-                                 ,Map_user["Years"].min())
+                years= st.slider("Select The Year",Map_user["Years"].min(), Map_user["Years"].max()
+                                 ,Map_user["Years"].min(),key=5)
             map_user_Y= map_user_plot_1(Map_user, years)
 
             col1,col2= st.columns(2)
             with col1:
 
-                quarters= st.selectbox("Select The Quarter_mu",map_user_Y["Quarter"].unique())
+                quarters= st.selectbox("Select The Quarter",map_user_Y["Quarter"].unique(),key=15)
             map_user_Y_Q= map_user_plot_2(map_user_Y, quarters)
 
             col1,col2= st.columns(2)
             with col1:
-                states= st.selectbox("Select The State_mu", map_user_Y_Q["States"].unique())
+                states= st.selectbox("Select The State", map_user_Y_Q["States"].unique(),key=16)
 
             map_user_plot_3(map_user_Y_Q,states)
 
@@ -734,17 +734,17 @@ elif select=="DATA EXPLORATION":
             col1,col2= st.columns(2)
             with col1:
 
-                years= st.slider("Select The Year",Top_transaction["Years"].min(),Top_transaction["Years"].max(),Top_transaction["Years"].min())
+                years= st.slider("Select The Year",Top_transaction["Years"].min(),Top_transaction["Years"].max(),Top_transaction["Years"].min(),key=6)
             top_t_Y= Transaction_Y(Top_transaction, years)
 
             col1,col2= st.columns(2)
             with col1:
 
-                quarters= st.selectbox("Select The Quarter_mu",top_t_Y["Quarter"].unique())
+                quarters= st.selectbox("Select The Quarter",top_t_Y["Quarter"].unique(),key=17)
             top_t_Y_Q= Transaction_Y_Q(top_t_Y, quarters)
             col1,col2= st.columns(2)
             with col1:
-                states= st.selectbox("Select The State", top_t_Y_Q["States"].unique())
+                states= st.selectbox("Select The State", top_t_Y_Q["States"].unique(),key=18)
 
             Top_transaction_plot_1(top_t_Y_Q, states)
 
@@ -753,12 +753,12 @@ elif select=="DATA EXPLORATION":
             col1,col2= st.columns(2)
             with col1:
 
-                years= st.slider("Select The Year_tu",Top_user["Years"].min(), Top_user["Years"].max(),Top_user["Years"].min())
+                years= st.slider("Select The Year",Top_user["Years"].min(), Top_user["Years"].max(),Top_user["Years"].min(),key=7)
             top_user_Y= top_user_plot_1(Top_user, years)
 
             col1,col2= st.columns(2)
             with col1:
-                states= st.selectbox("Select The State_tu", top_user_Y["States"].unique())
+                states= st.selectbox("Select The State", top_user_Y["States"].unique(),key=19)
 
             top_user_plot_2(top_user_Y, states)
 elif select=="TOP CHARTS":
